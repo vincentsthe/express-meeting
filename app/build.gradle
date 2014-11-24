@@ -1,16 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'AndroidKey'
-            keyPassword 'testcase'
-            storeFile file('/home/jordan/AndroidStudioProjects/testcase.jks')
-            storePassword 'testcase'
-        }
-    }
     compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    buildToolsVersion '21.1.1'
+
     defaultConfig {
         applicationId "com.testcase.expressmeeting"
         minSdkVersion 15
@@ -22,7 +15,8 @@ android {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+        }
+        debug {
         }
     }
 }
