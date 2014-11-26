@@ -1,5 +1,8 @@
 package com.testcase.expressmeeting.activities;
 
+import android.app.DatePickerDialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,8 +17,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewDebug;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +37,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.testcase.expressmeeting.R;
 import com.testcase.expressmeeting.activities.drawer.SidebarDrawer;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -52,6 +62,7 @@ public class CreateMeetingActivity extends ActionBarActivity {
         setContentView(R.layout.create_meeting);
 
         setupActionBar();
+
         Bundle extras = getIntent().getExtras();
         currentLoc = (LatLng)extras.get("position");
         currentAddress = getCompleteAddressString(currentLoc.latitude, currentLoc.longitude);
@@ -63,6 +74,8 @@ public class CreateMeetingActivity extends ActionBarActivity {
         sidebarDrawer.setupDrawer();
 //        Log.i(ACTIVITY_TAG, currentLoc.latitude+" "+currentLoc.longitude);
 //        Log.i(ACTIVITY_TAG,getCompleteAddressString(currentLoc.latitude, currentLoc.longitude));
+
+
     }
 
     @Override
@@ -162,5 +175,63 @@ public class CreateMeetingActivity extends ActionBarActivity {
 
         if (strAdd.length() == 0) strAdd = "Location";
         return strAdd;
+    }
+
+    public void showDatePickerDialog(View v) {
+        // Process to get Current Date
+        Calendar c = Calendar.getInstance();
+        int mYear, mMonth, mDay;
+        final Button btn = (Button) findViewById(R.id.dates);
+
+        if (btn.getText().toString().equals("Date")) {
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+        }
+        else {
+            String[] temp = btn.getText().toString().split("-");
+            mYear = Integer.parseInt(temp[0]);
+            mMonth = Integer.parseInt(temp[1])-1;
+            mDay = Integer.parseInt(temp[2]);
+        }
+
+        // Launch Date Picker Dialog
+        DatePickerDialog dpd = new DatePickerDialog(this,
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    // Display Selected date in textbox
+                    btn.setText(year + "-" + ((monthOfYear<9)?"0":"") + (monthOfYear + 1) + "-" + ((dayOfMonth<10)?"0":"") + dayOfMonth);
+                }
+            }, mYear, mMonth, mDay);
+        dpd.show();
+    }
+
+    public void showTimePickerDialog(View v) {
+        // Process to get Current Time
+        Calendar c = Calendar.getInstance();
+        int mHour, mMinute;
+        final Button btn = (Button) findViewById(R.id.times);
+
+        if (btn.getText().toString().equals("Time")) {
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+        }
+        else {
+            String[] temp = btn.getText().toString().split(":");
+            mHour = Integer.parseInt(temp[0]);
+            mMinute = Integer.parseInt(temp[1]);
+        }
+
+        // Launch Time Picker Dialog
+        TimePickerDialog tpd = new TimePickerDialog(this,
+            new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    // Display Selected time in textbox
+                    btn.setText(((hourOfDay<10)?"0":"") + hourOfDay + ":" + ((minute<10)?"0":"") + minute);
+                }
+            }, mHour, mMinute, true);
+        tpd.show();
     }
 }
