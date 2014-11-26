@@ -2,7 +2,15 @@ package com.testcase.expressmeeting.activities.model;
 
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class Meeting implements Serializable {
 
@@ -40,6 +47,16 @@ public class Meeting implements Serializable {
         }
         this.location = location;
         this.organizer_id = organizer_id;
+    }
+
+    public static Meeting[] getMockData() {
+        Meeting[] meetings = new Meeting[5];
+        meetings[0] = new Meeting(1, "Hackaton", "Be there at 7AM", 21.123123, 21.123123, 0, "2014-11-27 07:00:00", "Binus", 0);
+        meetings[1] = new Meeting(2, "Reunion", "We will meet up in front of restaurant.", 21.123123, 21.123123, 0, "2014-11-28 07:00:00", "East Restaurant", 0);
+        meetings[2] = new Meeting(5, "Startup Asia Jakarta", "Don't miss the first day!", 21.123123, 21.123123, 0, "2014-11-29 07:00:00", "Mandiri Tower", 1);
+        meetings[3] = new Meeting(7, "Tech In Asia", "Don't miss our event!", 21.123123, 21.123123, 0, "2014-11-30 07:00:00", "Jakarta Area", 0);
+        meetings[4] = new Meeting(9, "Annual Meeting", "Remember to bring your invitation.", 21.123123, 21.123123, 0, "2014-12-02 07:00:00", "West Restaurant", 1);
+        return meetings;
     }
 
     public int getId() {
@@ -111,16 +128,5 @@ public class Meeting implements Serializable {
 
     public String getLocation() {
         return this.location;
-    }
-
-    public static List<Meeting> getMockData() {
-        List<Meeting> ret = new ArrayList<Meeting>();
-        ret.add(new Meeting(1, "Hackaton", "Be there at 7AM", 21.123123, 21.123123, 0, "2014-11-27 07:00:00", "Binus", 0));
-        ret.add(new Meeting(2, "Reunion", "We will meet up in front of restaurant.", 21.123123, 21.123123, 0, "2014-11-29 07:00:00", "East Restaurant", 0));
-        ret.add(new Meeting(5, "Startup Asia Jakarta", "Don't miss the first day!", 21.123123, 21.123123, 0, "2014-11-28 07:00:00", "Mandiri Tower", 1));
-        ret.add(new Meeting(7, "Tech In Asia", "Don't miss our event!", 21.123123, 21.123123, 0, "2014-11-30 07:00:00", "Jakarta Area", 0));
-        ret.add(new Meeting(9, "Annual Meeting", "Remember to bring your invitation.", 21.123123, 21.123123, 0, "2014-12-02 07:00:00", "West Restaurant", 1));
-
-        return ret;
     }
 }

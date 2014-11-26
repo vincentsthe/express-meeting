@@ -30,6 +30,7 @@ import com.google.maps.android.ui.IconGenerator;
 import com.testcase.expressmeeting.R;
 import com.testcase.expressmeeting.activities.drawer.SidebarDrawer;
 import com.testcase.expressmeeting.activities.element.MenuListAdapter;
+import com.testcase.expressmeeting.activities.model.Meeting;
 
 
 public class MainActivity extends ActionBarActivity implements LocationListener {
@@ -64,6 +65,8 @@ public class MainActivity extends ActionBarActivity implements LocationListener 
         super.onStart();
 
         configMap();
+        setupFriends();
+        setupMeeting();
     }
 
     @Override
@@ -146,56 +149,52 @@ public class MainActivity extends ActionBarActivity implements LocationListener 
                 startActivity(intent);
             }
         });
-        setupFriends();
-        setupMeeting();
     }
 
     private void setupFriends() {
-        String username, name, lastLogin;
         IconGenerator factory = new IconGenerator(this);
         Bitmap icon;
         factory.setContentPadding(5, -5, 5, -3);
         factory.setStyle(IconGenerator.STYLE_GREEN);
 
-        username = "vincentsthe";
-        name = "Vincent Sebastian The";
-        lastLogin = "25 November 2014";
-        icon = factory.makeIcon(username);
-        mMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromBitmap(icon))
-                .position(new LatLng(currentLoc.getLatitude()+0.01, currentLoc.getLongitude()-0.005))
-                .title(name)
-                .snippet("Last Login : " + lastLogin)
-        );
+        //random friends
+        String[] username = {"vincentsthe", "dragoon20", "atnanahidiw", "fushar", "gmochid", "azaky", "yafithekid", "nathanajah", "jonathanirvings", "athin2008"};
+        String[] name = {"Vincent Sebastian The", "Jordan Fernando", "Mirza Widihananta", "Ashar Fuadi", "Abdurrosyid Handoyo", "Ahmad Zaky", "Muhammad Yafi", "Nathan Azaria", "Jonathan Irvin", "Ammar Fathin Sabili"};
+        double r, theta;
 
-        username = "atnanahidiw";
-        name = "Mirza Widihananta";
-        lastLogin = "25 November 2014";
-        icon = factory.makeIcon(username);
-        mMap.addMarker(new MarkerOptions()
-                        .icon(BitmapDescriptorFactory.fromBitmap(icon))
-                        .position(new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude()))
-                        .title(name)
-                        .snippet("Last Login : " + lastLogin)
-        );
+        for (int i=0; i<username.length; ++i) {
+            r = Math.random()*0.1;
+            theta = Math.random()*(2*Math.PI);
+            icon = factory.makeIcon(username[i]);
+            mMap.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.fromBitmap(icon))
+                            .position(new LatLng(currentLoc.getLatitude() + r*Math.cos(theta), currentLoc.getLongitude() + r*Math.sin(theta)))
+                            .title(name[i])
+                            .snippet("Last Login : " + ((int)(Math.random()*14)+13) + " November 2014")
+            );
+
+        }
     }
 
     private void setupMeeting() {
-        String date, name, location;
         IconGenerator factory = new IconGenerator(this);
         Bitmap icon;
         factory.setContentPadding(10, 2, 10, 2);
         factory.setStyle(IconGenerator.STYLE_BLUE);
 
-        date = "25";
-        name = "Kerja Bareng Hackathon";
-        location = "Kosan Mirza";
-        icon = factory.makeIcon(date);
-        mMap.addMarker(new MarkerOptions()
-                        .icon(BitmapDescriptorFactory.fromBitmap(icon))
-                        .position(new LatLng(currentLoc.getLatitude()+0.05, currentLoc.getLongitude()+0.05))
-                        .title(name)
-                        .snippet(location)
-        );
+        double r, theta;
+        Meeting[] listMeeting = Meeting.getMockData();
+
+        for (int i = 0; i < listMeeting.length; ++i) {
+            r = Math.random() * 0.1;
+            theta = Math.random() * (2 * Math.PI);
+            icon = factory.makeIcon(Integer.toString(listMeeting[i].getDay()));
+            mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromBitmap(icon))
+                .position(new LatLng(currentLoc.getLatitude() + r * Math.cos(theta), currentLoc.getLongitude() + r * Math.sin(theta)))
+                .title(listMeeting[i].getName())
+                .snippet(listMeeting[i].getLocation())
+            );
+        }
     }
 }
