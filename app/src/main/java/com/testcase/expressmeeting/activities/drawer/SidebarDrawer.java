@@ -34,6 +34,10 @@ public class SidebarDrawer {
         mDrawerList = (ListView) this.activity.findViewById(R.id.left_drawer);
         String[] menus = new String[]{"Home", "Profile", "Meetings", "Friends", "Notification"};
         MenuListAdapter menuListAdapter = new MenuListAdapter(this.activity, menus);
+
+        View header = this.activity.getLayoutInflater().inflate(R.layout.sidebar_header, null);
+        mDrawerList.addHeaderView(header);
+
         mDrawerList.setAdapter(menuListAdapter);
 
         mDrawerToggle = new ActionBarDrawerToggle(this.activity, mDrawerLayout, mToolbar, R.drawable.ic_launcher, R.drawable.ic_launcher) {
@@ -52,16 +56,16 @@ public class SidebarDrawer {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                if(position == 0) {
+                if(position == 1) {
                     Intent intent = new Intent(activity.getApplicationContext(), MainActivity.class);
                     activity.startActivity(intent);
-                } else if(position == 2) {
+                } else if(position == 3) {
                     Intent intent = new Intent(activity.getApplicationContext(), ListMeetingActivity.class);
                     activity.startActivity(intent);
                 } else {
-                        Intent intent = new Intent(activity.getApplicationContext(), DetailMeetingActivity.class);
+                        Intent intent = new Intent(activity.getApplicationContext(), ListMeetingActivity.class);
                         activity.startActivity(intent);
-                    }
+                }
                 }
             }
         );
