@@ -1,6 +1,8 @@
 package com.testcase.expressmeeting.activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,7 +21,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.ui.IconGenerator;
 import com.testcase.expressmeeting.R;
 
 
@@ -146,6 +151,66 @@ public class MainActivity extends ActionBarActivity implements LocationListener 
     private void configMap() {
         mMap = ((MapFragment)getFragmentManager().findFragmentByTag(MAP_TAG)).getMap();
         mMap.setMyLocationEnabled(true);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude()), 10.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude()), 13.0f));
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng point) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(point));
+                Intent intent = new Intent(getApplicationContext(), CreateMeetingActivity.class);
+                intent.putExtra("position",point);
+                startActivity(intent);
+            }
+        });
+        setupFriends();
+        setupMeeting();
+    }
+
+    private void setupFriends() {
+        String username, name, lastLogin;
+        IconGenerator factory = new IconGenerator(this);
+        Bitmap icon;
+        factory.setContentPadding(5, -5, 5, -3);
+        factory.setStyle(IconGenerator.STYLE_GREEN);
+
+        username = "vincentsthe";
+        name = "Vincent Sebastian The";
+        lastLogin = "25 November 2014";
+        icon = factory.makeIcon(username);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromBitmap(icon))
+                .position(new LatLng(currentLoc.getLatitude()+0.01, currentLoc.getLongitude()-0.005))
+                .title(name)
+                .snippet("Last Login : " + lastLogin)
+        );
+
+        username = "atnanahidiw";
+        name = "Mirza Widihananta";
+        lastLogin = "25 November 2014";
+        icon = factory.makeIcon(username);
+        mMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromBitmap(icon))
+                        .position(new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude()))
+                        .title(name)
+                        .snippet("Last Login : " + lastLogin)
+        );
+    }
+
+    private void setupMeeting() {
+        String date, name, location;
+        IconGenerator factory = new IconGenerator(this);
+        Bitmap icon;
+        factory.setContentPadding(10, 2, 10, 2);
+        factory.setStyle(IconGenerator.STYLE_BLUE);
+
+        date = "25";
+        name = "Kerja Bareng Hackathon";
+        location = "Kosan Mirza";
+        icon = factory.makeIcon(date);
+        mMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromBitmap(icon))
+                        .position(new LatLng(currentLoc.getLatitude()+0.05, currentLoc.getLongitude()+0.05))
+                        .title(name)
+                        .snippet(location)
+        );
     }
 }
