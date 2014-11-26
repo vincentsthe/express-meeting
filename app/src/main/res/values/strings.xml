@@ -8,5 +8,7 @@
     <string name="location">Location</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
+    <string name="organizer">Organizer</string>
+    <string name="participant">Participant</string>
 
 </resources>

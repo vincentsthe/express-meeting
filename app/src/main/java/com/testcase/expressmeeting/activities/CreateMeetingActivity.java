@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.testcase.expressmeeting.R;
+import com.testcase.expressmeeting.activities.drawer.SidebarDrawer;
 
 import java.util.List;
 import java.util.Locale;
@@ -43,10 +44,6 @@ public class CreateMeetingActivity extends ActionBarActivity {
 
     private Toolbar mToolbar;
 
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-
     private GoogleMap mMap;
 
     @Override
@@ -55,13 +52,15 @@ public class CreateMeetingActivity extends ActionBarActivity {
         setContentView(R.layout.create_meeting);
 
         setupActionBar();
-        setupDrawer();
         Bundle extras = getIntent().getExtras();
         currentLoc = (LatLng)extras.get("position");
         currentAddress = getCompleteAddressString(currentLoc.latitude, currentLoc.longitude);
         EditText et= (EditText) findViewById(R.id.location);
         et.setHint(currentAddress);
         setupMap();
+
+        SidebarDrawer sidebarDrawer = new SidebarDrawer(this, this.mToolbar);
+        sidebarDrawer.setupDrawer();
 //        Log.i(ACTIVITY_TAG, currentLoc.latitude+" "+currentLoc.longitude);
 //        Log.i(ACTIVITY_TAG,getCompleteAddressString(currentLoc.latitude, currentLoc.longitude));
     }
@@ -96,24 +95,6 @@ public class CreateMeetingActivity extends ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-    }
-
-    private void setupDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.drawable.ic_launcher, R.drawable.ic_launcher) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-        };
-
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     private void setupMap() {
