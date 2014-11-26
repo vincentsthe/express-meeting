@@ -30,13 +30,7 @@ public class ListMeetingActivity extends ActionBarActivity {
         sidebarDrawer.setupDrawer();
 
         ListView listView = (ListView) findViewById(R.id.list_meeting);
-        final Meeting[] listMeeting = new Meeting[]{
-            new Meeting(1, "Hackaton", "Be there at 7AM", 21.123123, 21.123123, 0, "2014-11-27 07:00:00", "Binus", 0),
-            new Meeting(2, "Reunion", "We will meet up in front of restaurant.", 21.123123, 21.123123, 0, "2014-11-29 07:00:00", "East Restaurant", 0),
-            new Meeting(5, "Startup Asia Jakarta", "Don't miss the first day!", 21.123123, 21.123123, 0, "2014-11-28 07:00:00", "Mandiri Tower", 1),
-            new Meeting(7, "Tech In Asia", "Don't miss our event!", 21.123123, 21.123123, 0, "2014-11-30 07:00:00", "Jakarta Area", 0),
-            new Meeting(9, "Annual Meeting", "Remember to bring your invitation.", 21.123123, 21.123123, 0, "2014-12-02 07:00:00", "West Restaurant", 1)
-        };
+        final Meeting[] listMeeting = Meeting.getMockData();
         MeetingListAdapter meetingListAdapter = new MeetingListAdapter(this, listMeeting);
         listView.setAdapter(meetingListAdapter);
 
