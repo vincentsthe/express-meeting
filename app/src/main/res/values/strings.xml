@@ -8,5 +8,12 @@
     <string name="location">Location</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
+    <string name="organizer">Organizer</string>
+    <string name="participant">Participant</string>
+    <string name="title_activity_list_meeting">ListMeetingActivity</string>
+    <string name="title_activity_setup">SetupActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 
 </resources>

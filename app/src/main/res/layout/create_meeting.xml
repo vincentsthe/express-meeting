@@ -8,6 +8,7 @@
         android:id="@+id/create_meeting_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -47,6 +48,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/map_container"
                     android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:alpha="0.9"
                     android:hint="@string/location" />
 
                 <EditText
@@ -55,31 +59,53 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_below="@id/location"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:alpha="0.9"
                     android:hint="@string/name" />
 
-                <DatePicker
+                <Button
                     android:id="@+id/dates"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/name"
                     android:layout_alignParentLeft="true"
-                    android:calendarViewShown="false"
-                    android:layout_toLeftOf="@+id/times"/>
+                    android:layout_toLeftOf="@+id/times"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="Date"
+                    android:textColor="@color/black"
+                    android:alpha="0.9"
+                    style="@android:style/Widget.Holo.Spinner"
+                    android:onClick="showDatePickerDialog" />
 
-                <TimePicker
+                <Button
                     android:id="@id/times"
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/name"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="Time"
+                    style="@android:style/Widget.Holo.Spinner"
+                    android:textColor="@color/black"
+                    android:alpha="0.9"
+                    android:onClick="showTimePickerDialog" />
 
                 <EditText
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="false"
-                    android:lines="3"
+                    android:layout_marginTop="10dp"
                     android:layout_below="@id/dates"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:alpha="0.9"
+                    android:singleLine="false"
+                    android:lines="5"
                     android:hint="@string/description" />
 
                 <Button
@@ -88,6 +114,8 @@
                     android:layout_below="@id/description"
                     android:layout_marginTop="20dp"
                     android:layout_centerHorizontal="true"
+                    android:textColor="@color/black"
+                    android:alpha="0.9"
                     android:text="@string/create" />
 
             </RelativeLayout>
