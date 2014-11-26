@@ -42,17 +42,41 @@
                     android:id="@+id/datetime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_below="@id/name"
                     android:textSize="@dimen/abc_text_size_small_material"/>
+
+                <TextView
+                    android:id="@+id/organizer_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/datetime"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/location"
+                    android:textSize="@dimen/abc_text_size_medium_material"/>
+
+                <TextView
+                    android:id="@+id/organizer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/organizer_label"
+                    android:textSize="@dimen/abc_text_size_body_1_material"/>
+
+                <TextView
+                    android:id="@+id/location_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/organizer"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/location"
+                    android:textSize="@dimen/abc_text_size_medium_material"/>
 
                 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/map_container"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_below="@id/datetime"
+                    android:layout_below="@id/location_label"
                     tools:ignore="MergeRootFrame" >
                 </FrameLayout>
 
@@ -64,10 +88,18 @@
                     android:textSize="@dimen/abc_text_size_body_1_material"/>
 
                 <TextView
+                    android:id="@+id/description_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/location"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/description"
+                    android:textSize="@dimen/abc_text_size_medium_material"/>
+
+                <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_below="@id/location"
                     android:textSize="@dimen/abc_text_size_body_1_material"/>
 
@@ -79,9 +111,9 @@
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:divider="@android:color/transparent"
                     android:background="@color/green_400">
-            </ListView>
+                </ListView>
 
-            <ListView android:id="@+id/maybe_participant"
+                <ListView android:id="@+id/maybe_participant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/accepted_participant"

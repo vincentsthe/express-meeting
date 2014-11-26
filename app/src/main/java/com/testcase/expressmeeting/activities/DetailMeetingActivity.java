@@ -144,6 +144,10 @@ public class DetailMeetingActivity extends ActionBarActivity {
         label = (TextView)findViewById(R.id.datetime);
         label.setText("2014-11-25 18:00:00");
 
+        //organizer
+        label = (TextView)findViewById(R.id.organizer);
+        label.setText("Mirza Widihananta");
+
         //location
         currentLoc = new LatLng(20, 20);
         label = (TextView)findViewById(R.id.location);
