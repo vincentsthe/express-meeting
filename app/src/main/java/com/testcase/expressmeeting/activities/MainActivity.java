@@ -12,9 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,6 +28,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 import com.testcase.expressmeeting.R;
+import com.testcase.expressmeeting.activities.drawer.SidebarDrawer;
+import com.testcase.expressmeeting.activities.element.MenuListAdapter;
 
 
 public class MainActivity extends ActionBarActivity implements LocationListener {
@@ -34,13 +38,9 @@ public class MainActivity extends ActionBarActivity implements LocationListener 
 
     private Location currentLoc;
 
-    private Toolbar mToolbar;
-
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-
     private GoogleMap mMap;
+
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +48,13 @@ public class MainActivity extends ActionBarActivity implements LocationListener 
         setContentView(R.layout.activity_main);
 
         setupActionBar();
-        setupDrawer();
+//        setupDrawer();
         if (savedInstanceState == null) {
             setupMap();
         }
+
+        SidebarDrawer sidebarDrawer = new SidebarDrawer(this, this.mToolbar);
+        sidebarDrawer.setupDrawer();
 
         setupLocation();
     }
@@ -106,24 +109,6 @@ public class MainActivity extends ActionBarActivity implements LocationListener 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-    }
-
-    private void setupDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.drawable.ic_launcher, R.drawable.ic_launcher) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-        };
-
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     private void setupLocation() {
