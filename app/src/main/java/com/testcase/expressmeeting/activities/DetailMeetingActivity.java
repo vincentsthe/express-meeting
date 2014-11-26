@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,15 +32,13 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class CreateMeetingActivity extends ActionBarActivity {
+public class DetailMeetingActivity extends ActionBarActivity {
 
     private static final String MAP_TAG = "GMap";
 
 //    private static final String ACTIVITY_TAG = "CreateMeetingActivity";
 
     private LatLng currentLoc;
-
-    private String currentAddress;
 
     private Toolbar mToolbar;
 
@@ -52,15 +51,10 @@ public class CreateMeetingActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_meeting);
+        setContentView(R.layout.detail_meeting);
 
         setupActionBar();
         setupDrawer();
-        Bundle extras = getIntent().getExtras();
-        currentLoc = (LatLng)extras.get("position");
-        currentAddress = getCompleteAddressString(currentLoc.latitude, currentLoc.longitude);
-        EditText et= (EditText) findViewById(R.id.location);
-        et.setHint(currentAddress);
         setupMap();
 //        Log.i(ACTIVITY_TAG, currentLoc.latitude+" "+currentLoc.longitude);
 //        Log.i(ACTIVITY_TAG,getCompleteAddressString(currentLoc.latitude, currentLoc.longitude));
@@ -70,6 +64,7 @@ public class CreateMeetingActivity extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
 
+        addMeetingDetail();
         configMap();
     }
 
@@ -132,54 +127,30 @@ public class CreateMeetingActivity extends ActionBarActivity {
     private void configMap() {
         mMap = ((MapFragment)getFragmentManager().findFragmentByTag(MAP_TAG)).getMap();
         mMap.setMyLocationEnabled(false);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 19.0f));
 
         MarkerOptions markerOpt = new MarkerOptions().position(currentLoc);
-        final Marker marker = mMap.addMarker(markerOpt);
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng point) {
-                currentLoc = point;
-                marker.setPosition(currentLoc);
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLoc));
-                currentAddress = getCompleteAddressString(currentLoc.latitude, currentLoc.longitude);
-                EditText et= (EditText) findViewById(R.id.location);
-                et.setHint(currentAddress);
-            }
-        });
+        mMap.addMarker(markerOpt);
     }
 
-    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
-        String strAdd = "";
+    private void addMeetingDetail() {
+        TextView label;
 
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        //name
+        label = (TextView)findViewById(R.id.name);
+        label.setText("Kerja Bareng Hackathon");
 
-        try {
-            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
-            if (addresses != null) {
-                Address returnedAddress = addresses.get(0);
-//                Log.i(ACTIVITY_TAG, returnedAddress.toString());
+        //datetime
+        label = (TextView)findViewById(R.id.datetime);
+        label.setText("2014-11-25 18:00:00");
 
-                StringBuilder strReturnedAddress = new StringBuilder("");
+        //location
+        currentLoc = new LatLng(20, 20);
+        label = (TextView)findViewById(R.id.location);
+        label.setText("Kosan Mirza");
 
-                int i;
-                for (i = 0; i < returnedAddress.getMaxAddressLineIndex()-1; i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append(", ");
-                }
-                String last = returnedAddress.getAddressLine(i);
-                String[] lastAddress = last.split(",");
-                strReturnedAddress.append(lastAddress[0]);
-                strAdd = strReturnedAddress.toString();
-//                Log.w("My Current loction address", "" + strReturnedAddress.toString());
-            } else {
-//                Log.w("My Current loction address", "No Address returned!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-//            Log.w("My Current loction address", "Canont get Address!");
-        }
-
-        if (strAdd.length() == 0) strAdd = "Location";
-        return strAdd;
+        //description
+        label = (TextView)findViewById(R.id.description);
+        label.setText("Jangan lupa makan dulu");
     }
 }

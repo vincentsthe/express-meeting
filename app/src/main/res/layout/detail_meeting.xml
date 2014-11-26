@@ -23,7 +23,7 @@
             android:layout_below="@id/toolbar">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/inside_create_meeting_layout"
+                android:id="@+id/inside_detail_meeting_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="30dp"
@@ -32,63 +32,84 @@
                 android:paddingRight="16dp"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/abc_text_size_display_2_material"/>
+
+                <TextView
+                    android:id="@+id/datetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/name"
+                    android:textSize="@dimen/abc_text_size_small_material"/>
+
                 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/map_container"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    tools:context=".CreateMeetingActivity"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/datetime"
                     tools:ignore="MergeRootFrame" >
                 </FrameLayout>
 
-                <EditText
+                <TextView
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/map_container"
-                    android:layout_marginTop="20dp"
-                    android:hint="@string/location" />
+                    android:textSize="@dimen/abc_text_size_body_1_material"/>
 
-                <EditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@id/location"
-                    android:hint="@string/name" />
-
-                <DatePicker
-                    android:id="@+id/dates"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/name"
-                    android:layout_alignParentLeft="true"
-                    android:calendarViewShown="false"
-                    android:layout_toLeftOf="@+id/times"/>
-
-                <TimePicker
-                    android:id="@id/times"
-                    android:layout_width="96dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/name"
-                    android:layout_alignParentRight="true"/>
-
-                <EditText
+                <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="false"
-                    android:lines="3"
-                    android:layout_below="@id/dates"
-                    android:hint="@string/description" />
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/location"
+                    android:textSize="@dimen/abc_text_size_body_1_material"/>
 
-                <Button
-                    android:layout_width="96dp"
+                <ListView android:id="@+id/accepted_participant"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/description"
                     android:layout_marginTop="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/create" />
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:divider="@android:color/transparent"
+                    android:background="@color/green_400">
+            </ListView>
+
+            <ListView android:id="@+id/maybe_participant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/accepted_participant"
+                    android:layout_marginTop="20dp"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:divider="@android:color/transparent"
+                    android:background="@color/yellow_400">
+                </ListView>
+
+                <ListView android:id="@+id/declined_participant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/maybe_participant"
+                    android:layout_marginTop="20dp"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:divider="@android:color/transparent"
+                    android:background="@color/red_400">
+                </ListView>
+
+                <ListView android:id="@+id/pending_participant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/declined_participant"
+                    android:layout_marginTop="20dp"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:divider="@android:color/transparent"
+                    android:background="@color/white">
+                </ListView>
 
             </RelativeLayout>
 
