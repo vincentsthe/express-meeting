@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.testcase.expressmeeting.R;
 import com.testcase.expressmeeting.activities.DetailMeetingActivity;
+import com.testcase.expressmeeting.activities.ListMeetingActivity;
 import com.testcase.expressmeeting.activities.MainActivity;
 import com.testcase.expressmeeting.activities.element.MenuListAdapter;
 
@@ -54,12 +55,16 @@ public class SidebarDrawer {
                 if(position == 0) {
                     Intent intent = new Intent(activity.getApplicationContext(), MainActivity.class);
                     activity.startActivity(intent);
-                } else {
-                    Intent intent = new Intent(activity.getApplicationContext(), DetailMeetingActivity.class);
+                } else if(position == 2) {
+                    Intent intent = new Intent(activity.getApplicationContext(), ListMeetingActivity.class);
                     activity.startActivity(intent);
+                } else {
+                        Intent intent = new Intent(activity.getApplicationContext(), DetailMeetingActivity.class);
+                        activity.startActivity(intent);
+                    }
                 }
             }
-        });
+        );
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
