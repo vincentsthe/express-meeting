@@ -1,5 +1,8 @@
 package com.testcase.expressmeeting.activities.model;
 
+import android.util.Log;
+
+import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Meeting {
+public class Meeting implements Serializable {
 
     private int id;
     private String name;
@@ -16,9 +19,10 @@ public class Meeting {
     private Double longitude;
     private int open;
     private Calendar time;
+    private String location;
     private int organizer_id;
 
-    public Meeting(int id, String name, String description, Double latitude, Double longitude, int open, String time, int organizer_id) {
+    public Meeting(int id, String name, String description, Double latitude, Double longitude, int open, String time, String location, int organizer_id) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,11 +30,13 @@ public class Meeting {
         this.longitude = longitude;
         this.open = open;
         try {
+            this.time = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             this.time.setTime(sdf.parse(time));
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        this.location = location;
         this.organizer_id = organizer_id;
     }
 
@@ -99,5 +105,9 @@ public class Meeting {
         long diff = this.time.getTime().getTime() - now.getTime();
 
         return (diff/(1000 * 60 * 60 * 24));
+    }
+
+    public String getLocation() {
+        return this.location;
     }
 }

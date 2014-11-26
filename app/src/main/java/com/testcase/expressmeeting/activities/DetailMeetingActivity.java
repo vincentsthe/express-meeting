@@ -28,7 +28,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.testcase.expressmeeting.R;
 import com.testcase.expressmeeting.activities.drawer.SidebarDrawer;
+import com.testcase.expressmeeting.activities.model.Meeting;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,6 +47,8 @@ public class DetailMeetingActivity extends ActionBarActivity {
 
     private GoogleMap mMap;
 
+    private Meeting meeting;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,9 @@ public class DetailMeetingActivity extends ActionBarActivity {
 
         SidebarDrawer sidebarDrawer = new SidebarDrawer(this, this.mToolbar);
         sidebarDrawer.setupDrawer();
+
+        Intent intent = getIntent();
+        this.meeting = (Meeting) intent.getSerializableExtra("MEETING_DETAIL");
     }
 
     @Override
@@ -118,11 +125,11 @@ public class DetailMeetingActivity extends ActionBarActivity {
 
         //name
         label = (TextView)findViewById(R.id.name);
-        label.setText("Kerja Bareng Hackathon");
+        label.setText(this.meeting.getName());
 
         //datetime
         label = (TextView)findViewById(R.id.datetime);
-        label.setText("2014-11-25 18:00:00");
+        label.setText(this.meeting.getFullString());
 
         //organizer
         label = (TextView)findViewById(R.id.organizer);
@@ -131,10 +138,10 @@ public class DetailMeetingActivity extends ActionBarActivity {
         //location
         currentLoc = new LatLng(-6.878944, 107.6172301);
         label = (TextView)findViewById(R.id.location);
-        label.setText("Kosan Mirza");
+        label.setText(this.meeting.getLocation());
 
         //description
         label = (TextView)findViewById(R.id.description);
-        label.setText("Jangan lupa makan dulu");
+        label.setText(this.meeting.getDescription());
     }
 }

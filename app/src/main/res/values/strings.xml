@@ -10,5 +10,6 @@
     <string name="description">Description</string>
     <string name="organizer">Organizer</string>
     <string name="participant">Participant</string>
+    <string name="title_activity_list_meeting">ListMeetingActivity</string>
 
 </resources>
