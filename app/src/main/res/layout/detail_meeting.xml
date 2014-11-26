@@ -8,6 +8,7 @@
         android:id="@+id/create_meeting_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -36,6 +37,8 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:alpha="0.9"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/abc_text_size_display_1_material"
                     android:textStyle="bold"/>
 
@@ -45,6 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_below="@id/name"
+                    android:alpha="0.65"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/abc_text_size_small_material"/>
 
                 <TextView
@@ -53,8 +58,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/datetime"
                     android:layout_marginTop="20dp"
+                    android:alpha="0.65"
+                    android:textColor="@color/black"
                     android:text="@string/organizer"
-                    android:textStyle="bold"
                     android:textSize="@dimen/abc_text_size_medium_material"/>
 
                 <TextView
@@ -63,6 +69,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/organizer_label"
                     android:layout_marginTop="5dp"
+                    android:alpha="0.9"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/abc_text_size_body_1_material"/>
 
                 <TextView
@@ -71,8 +79,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/organizer"
                     android:layout_marginTop="20dp"
+                    android:alpha="0.65"
+                    android:textColor="@color/black"
                     android:text="@string/location"
-                    android:textStyle="bold"
                     android:textSize="@dimen/abc_text_size_medium_material"/>
 
                 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -92,6 +101,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/map_container"
                     android:layout_marginTop="5dp"
+                    android:alpha="0.9"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/abc_text_size_body_1_material"/>
 
                 <TextView
@@ -100,8 +111,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/location"
                     android:layout_marginTop="20dp"
+                    android:alpha="0.65"
+                    android:textColor="@color/black"
                     android:text="@string/description"
-                    android:textStyle="bold"
                     android:textSize="@dimen/abc_text_size_medium_material"/>
 
                 <TextView
@@ -110,6 +122,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/description_label"
                     android:layout_marginTop="5dp"
+                    android:alpha="0.9"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/abc_text_size_body_1_material"/>
 
                 <TextView
@@ -118,8 +132,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/description"
                     android:layout_marginTop="20dp"
+                    android:alpha="0.65"
+                    android:textColor="@color/black"
                     android:text="@string/participant"
-                    android:textStyle="bold"
                     android:textSize="@dimen/abc_text_size_medium_material"/>
 
                 <ListView android:id="@+id/accepted_participant"
